@@ -1,0 +1,118 @@
+{
+  "name": "src-app-authenticate",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "src/app/authenticate/src",
+  "prefix": "angular-chat-app",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/src/app/authenticate",
+        "index": "src/app/authenticate/src/index.html",
+        "main": "src/app/authenticate/src/main.ts",
+        "polyfills": [
+          "zone.js"
+        ],
+        "tsConfig": "src/app/authenticate/tsconfig.app.json",
+        "assets": [
+          "src/app/authenticate/src/favicon.ico",
+          "src/app/authenticate/src/assets"
+        ],
+        "styles": [
+          "node_modules/bootstrap/dist/css/bootstrap.min.css",
+          "src/app/authenticate/src/styles.css"
+        ],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "src/app/authenticate/webpack.config.js"
+        },
+        "commonChunk": false
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "src/app/authenticate/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "src-app-authenticate:build:production"
+        },
+        "development": {
+          "browserTarget": "src-app-authenticate:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4201,
+        "publicHost": "http://localhost:4201"
+      }
+    },
+    "extract-i18n": {
+      "executor": "ngx-build-plus:extract-i18n",
+      "options": {
+        "browserTarget": "src-app-authenticate:build",
+        "extraWebpackConfig": "src/app/authenticate/webpack.config.js"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "src/app/authenticate/**/*.ts",
+          "src/app/authenticate/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "src/app/authenticate/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
